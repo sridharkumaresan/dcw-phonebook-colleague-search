@@ -52,7 +52,7 @@ export default class DcwPhonebookColleagueSearchAdaptiveCardExtension extends Ba
     return CARD_VIEW_REGISTRY_ID;
   }
 
-  protected get iconProperty(): string {
+  public get iconProperty(): string {
     return 'Phone';
   }
 
