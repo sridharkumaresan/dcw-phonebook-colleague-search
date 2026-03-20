@@ -161,7 +161,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
     const CardComponent = USE_MOCK ? MockProfileCard : ProfileCard;
 
     return items.map(person => (
-      <div key={person.id} onClick={() => handleProfileClick(person)} className={styles.resultItem}>
+      <div key={person.id} onClickCapture={(e) => { e.preventDefault(); e.stopPropagation(); handleProfileClick(person); }} className={styles.resultItem}>
         <CardComponent 
           idOrUpn={person.id} 
           viewType={'basic'} 
