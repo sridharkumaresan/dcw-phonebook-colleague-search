@@ -101,7 +101,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
     try {
       const query = utilityService.current.fullMatchQueryBuilder(term);
       const limit = props.rowLimit;
-      const response = await searchService.current.search(query, limit, '', {});
+      const response = await searchService.current.search(query, limit, '0');
       
       if (requestSeq.current === currentSeq) {
         setResults(response.results);
