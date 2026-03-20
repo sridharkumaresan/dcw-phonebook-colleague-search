@@ -52,6 +52,10 @@ export default class DcwPhonebookColleagueSearchAdaptiveCardExtension extends Ba
     return CARD_VIEW_REGISTRY_ID;
   }
 
+  protected get iconProperty(): string {
+    return 'Phone';
+  }
+
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return this._deferredPropertyPane?.getPropertyPaneConfiguration() ?? super.getPropertyPaneConfiguration();
   }
