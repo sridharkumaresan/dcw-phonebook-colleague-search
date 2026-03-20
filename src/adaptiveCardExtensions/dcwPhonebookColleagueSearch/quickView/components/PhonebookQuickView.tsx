@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Input, FluentProvider, webLightTheme, Spinner, Link, Text, tokens, makeStyles, Button } from '@fluentui/react-components';
-import { SearchRegular, DismissRegular } from '@fluentui/react-icons';
+import { SearchRegular, DismissRegular, ChevronRightRegular } from '@fluentui/react-icons';
 import { debounce } from 'lodash';
 import { ProfileCard, UserProfileService, SearchService, UtilityService } from '@barclays/phonebook-sp-fx-profile';
 import { IColleagueProfile } from '../../../../models/IColleagueProfile';
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   container: { 
     display: 'flex', 
     flexDirection: 'column', 
-    height: '600px', 
+    height: '100%', 
     overflow: 'hidden' 
   },
   searchContainer: {
@@ -221,8 +221,10 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
                <Text className={styles.sectionHeading}>Showing {results.length} of {totalRows} results</Text>
                {renderList(results)}
                {totalRows > 10 && (
-                 <div style={{ marginTop: '16px', paddingBottom: '8px' }}>
-                   <Link href={props.phonebookWebUrl} target="_blank" style={{ fontWeight: 600 }}>View all results {'>'}</Link>
+                 <div style={{ marginTop: '16px', paddingBottom: '8px', display: 'flex', justifyContent: 'center' }}>
+                   <Link href={`${props.phonebookWebUrl}/search.aspx?q=${encodeURIComponent(searchTerm)}`} target="_blank" style={{ fontWeight: 600, display: 'inline-flex', alignItems: 'center' }}>
+                     View all results <ChevronRightRegular fontSize={16} style={{ marginLeft: '4px' }} />
+                   </Link>
                  </div>
                )}
             </div>
