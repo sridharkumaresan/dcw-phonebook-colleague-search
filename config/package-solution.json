@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "dcw-phonebook-colleague-search-client-side-solution",
+    "id": "730f061e-2153-4e19-a537-86a3159fa991",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "dcw-phonebook-colleague-search description"
+      },
+      "longDescription": {
+        "default": "dcw-phonebook-colleague-search description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "dcw-phonebook-colleague-search Feature",
+        "description": "The feature that activates elements of the dcw-phonebook-colleague-search solution.",
+        "id": "21f878c4-7621-4621-92e4-f139c0d578f2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/dcw-phonebook-colleague-search.sppkg"
+  }
+}

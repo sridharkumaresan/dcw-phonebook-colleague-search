@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "dcw-phonebook-colleague-search-adaptive-card-extension": {
+      "components": [
+        {
+          "entrypoint": "./lib/adaptiveCardExtensions/dcwPhonebookColleagueSearch/DcwPhonebookColleagueSearchAdaptiveCardExtension.js",
+          "manifest": "./src/adaptiveCardExtensions/dcwPhonebookColleagueSearch/DcwPhonebookColleagueSearchAdaptiveCardExtension.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {
+    "@barclays/phonebook-sp-fx-profile": {
+      "path": "https://localhost/dummy.js",
+      "globalName": "BarclaysPhonebookSpFxProfile"
+    }
+  },
+  "localizedResources": {
+    "DcwPhonebookColleagueSearchAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/dcwPhonebookColleagueSearch/loc/{locale}.js"
+  }
+}
