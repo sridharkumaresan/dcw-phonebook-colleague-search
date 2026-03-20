@@ -1,0 +1,29 @@
+<svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fluentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AFFDFD" />
+      <stop offset="14%" stop-color="#95F1FA" />
+      <stop offset="28%" stop-color="#67DCF7" />
+      <stop offset="42%" stop-color="#42CBF4" />
+      <stop offset="57%" stop-color="#25BEF1" />
+      <stop offset="71%" stop-color="#10B5F0" />
+      <stop offset="85%" stop-color="#04AFEF" />
+      <stop offset="100%" stop-color="#00AEEF" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="300" fill="url(#fluentGrad)" />
+  <!-- Glassmorphic Search / Contact Illustration -->
+  <g transform="translate(230, 80)">
+    <!-- Contact Card base -->
+    <rect x="0" y="0" width="140" height="140" rx="20" fill="#ffffff" opacity="0.95"/>
+    <rect x="-10" y="10" width="160" height="120" rx="15" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <!-- Avatar head -->
+    <circle cx="70" cy="55" r="22" fill="#00AEEF" />
+    <!-- Avatar body -->
+    <path d="M70 85 C90 85, 105 100, 105 115 L35 115 C35 100, 50 85, 70 85 Z" fill="#00AEEF" />
+    <!-- Search Magnifying Glass overlaying the corner -->
+    <circle cx="120" cy="120" r="22" fill="#ffffff" stroke="#25BEF1" stroke-width="5"/>
+    <path d="M135 135 L155 155" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+    <path d="M135 135 L155 155" stroke="#25BEF1" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -23,9 +23,36 @@ export interface IPhonebookQuickViewProps {
 }
 
 const useStyles = makeStyles({
-  container: { display: 'flex', flexDirection: 'column', gap: '10px', padding: '16px' },
-  searchBox: { width: '100%' },
-  results: { display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' },
+  container: { 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '10px', 
+    padding: '16px',
+    height: '100%', 
+    overflow: 'hidden' // Force scroll constraint internally
+  },
+  searchBox: { width: '100%', flexShrink: 0 },
+  results: { 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '8px', 
+    marginTop: '10px',
+    flex: '1 1 auto',
+    overflowY: 'auto',
+    paddingRight: '6px', // space for scrollbar
+    // MacOS hover invisible style CSS
+    '&::-webkit-scrollbar': {
+      width: '6px',
+      backgroundColor: 'transparent'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px',
+      backgroundColor: 'transparent'
+    },
+    '&:hover::-webkit-scrollbar-thumb': {
+      backgroundColor: tokens.colorNeutralStroke1
+    }
+  },
   footer: { marginTop: '16px', borderTop: `1px solid ${tokens.colorNeutralStroke1}`, paddingTop: '8px' },
   resultItem: {
     cursor: 'pointer',

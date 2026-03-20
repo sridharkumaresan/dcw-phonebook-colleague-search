@@ -1,7 +1,7 @@
 import {
   BaseComponentsCardView,
   ComponentsCardViewParameters,
-  BasicCardView,
+  ImageCardView,
   IExternalLinkCardAction,
   IQuickViewCardAction
 } from '@microsoft/sp-adaptive-card-extension-base';
@@ -18,7 +18,7 @@ export class CardView extends BaseComponentsCardView<
   ComponentsCardViewParameters
 > {
   public get cardViewParameters(): ComponentsCardViewParameters {
-    return BasicCardView({
+    return ImageCardView({
       cardBar: {
         componentName: 'cardBar',
         title: this.properties.title
@@ -27,9 +27,14 @@ export class CardView extends BaseComponentsCardView<
         componentName: 'text',
         text: this.properties.headerText
       },
+      image: {
+        url: require('../assets/phonebook-gradient.svg'),
+        altText: 'Phonebook Illustration'
+      },
       footer: {
         componentName: 'cardButton',
-        title: 'Search',
+        title: 'Search Directory',
+        style: 'positive',
         action: {
           type: 'QuickView',
           parameters: {
