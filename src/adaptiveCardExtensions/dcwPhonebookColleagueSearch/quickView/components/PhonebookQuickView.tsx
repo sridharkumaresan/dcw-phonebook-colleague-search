@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Input, FluentProvider, webLightTheme, Spinner, Link, Text, tokens, makeStyles } from '@fluentui/react-components';
-import { SearchRegular } from '@fluentui/react-icons';
+import { Input, FluentProvider, webLightTheme, Spinner, Link, Text, tokens, makeStyles, Button } from '@fluentui/react-components';
+import { SearchRegular, DismissRegular } from '@fluentui/react-icons';
 import { debounce } from 'lodash';
 import { ProfileCard, UserProfileService, SearchService, UtilityService } from '@barclays/phonebook-sp-fx-profile';
 import { IColleagueProfile } from '../../../../models/IColleagueProfile';
@@ -26,20 +26,30 @@ const useStyles = makeStyles({
   container: { 
     display: 'flex', 
     flexDirection: 'column', 
-    gap: '10px', 
+    height: '600px', 
+    overflow: 'hidden' 
+  },
+  searchContainer: {
+    backgroundColor: '#f5f5f5',
     padding: '16px',
-    height: '100%', 
-    overflow: 'hidden' // Force scroll constraint internally
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    flexShrink: 0
+  },
+  searchTitle: {
+    fontWeight: 600,
+    fontSize: tokens.fontSizeBase300,
+    color: tokens.colorNeutralForeground1
   },
   searchBox: { width: '100%', flexShrink: 0 },
   results: { 
     display: 'flex', 
     flexDirection: 'column', 
     gap: '8px', 
-    marginTop: '10px',
+    padding: '16px',
     flex: '1 1 auto',
     overflowY: 'auto',
-    paddingRight: '6px', // space for scrollbar
     // MacOS hover invisible style CSS
     '&::-webkit-scrollbar': {
       width: '6px',
@@ -53,7 +63,12 @@ const useStyles = makeStyles({
       backgroundColor: tokens.colorNeutralStroke1
     }
   },
-  footer: { marginTop: '16px', borderTop: `1px solid ${tokens.colorNeutralStroke1}`, paddingTop: '8px' },
+  footer: { 
+    borderTop: `1px solid ${tokens.colorNeutralStroke1}`, 
+    padding: '16px',
+    flexShrink: 0,
+    display: 'flex'
+  },
   resultItem: {
     cursor: 'pointer',
     padding: '4px 8px',
@@ -178,13 +193,21 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
   return (
     <FluentProvider theme={webLightTheme} style={{height: '100%'}}>
       <div className={styles.container}>
-        <Input 
-          className={styles.searchBox}
-          placeholder="Search for a colleague"
-          contentBefore={<SearchRegular />}
-          value={searchTerm}
-          onChange={onSearchChange}
-        />
+        <div className={styles.searchContainer}>
+          <Text className={styles.searchTitle}>Search for a colleague</Text>
+          <Input 
+            className={styles.searchBox}
+            placeholder="Enter a name or BRID"
+            contentBefore={<SearchRegular />}
+            contentAfter={searchTerm.length > 0 ? <DismissRegular style={{ cursor: 'pointer' }} onClick={() => {
+              setSearchTerm('');
+              setResults([]);
+              setIsSearching(false);
+            }} /> : null}
+            value={searchTerm}
+            onChange={onSearchChange}
+          />
+        </div>
         
         <div className={styles.results}>
           {isSearching && <Spinner size="tiny" label="Searching..." />}
@@ -197,6 +220,11 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
             <div>
                <Text className={styles.sectionHeading}>Showing {results.length} of {totalRows} results</Text>
                {renderList(results)}
+               {totalRows > 10 && (
+                 <div style={{ marginTop: '16px', paddingBottom: '8px' }}>
+                   <Link href={props.phonebookWebUrl} target="_blank" style={{ fontWeight: 600 }}>View all results {'>'}</Link>
+                 </div>
+               )}
             </div>
           )}
           
@@ -209,7 +237,9 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
         </div>
         
         <div className={styles.footer}>
-          <Link href={props.phonebookWebUrl} target="_blank">Go to Phonebook</Link>
+          <Button style={{ width: '100%' }} onClick={() => window.open(props.phonebookWebUrl, '_blank')}>
+            Go to Phonebook
+          </Button>
         </div>
       </div>
     </FluentProvider>
