@@ -31,18 +31,6 @@ const useStyles = makeStyles({
     height: '100%', 
     overflow: 'hidden' // Force scroll constraint internally
   },
-  gradientBanner: {
-    background: 'linear-gradient(90deg, #AFFDFD 0%, #67DCF7 28%, #25BEF1 57%, #00AEEF 100%)',
-    margin: '-16px -16px 16px -16px',
-    padding: '24px 16px',
-    color: '#003366', // Deep blue contrast
-    fontWeight: '600',
-    fontSize: tokens.fontSizeBase500,
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-  },
   searchBox: { width: '100%', flexShrink: 0 },
   results: { 
     display: 'flex', 
@@ -190,11 +178,6 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
   return (
     <FluentProvider theme={webLightTheme} style={{height: '100%'}}>
       <div className={styles.container}>
-        <div className={styles.gradientBanner}>
-          <SearchRegular style={{fontSize: '24px'}} />
-          Phonebook Directory
-        </div>
-        
         <Input 
           className={styles.searchBox}
           placeholder="Search for a colleague"
