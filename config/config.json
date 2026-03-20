@@ -11,12 +11,7 @@
       ]
     }
   },
-  "externals": {
-    "@barclays/phonebook-sp-fx-profile": {
-      "path": "https://localhost/dummy.js",
-      "globalName": "BarclaysPhonebookSpFxProfile"
-    }
-  },
+  "externals": {},
   "localizedResources": {
     "DcwPhonebookColleagueSearchAdaptiveCardExtensionStrings": "lib/adaptiveCardExtensions/dcwPhonebookColleagueSearch/loc/{locale}.js"
   }

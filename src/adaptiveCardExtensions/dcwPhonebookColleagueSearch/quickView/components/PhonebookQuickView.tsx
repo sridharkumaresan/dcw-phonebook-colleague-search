@@ -2,7 +2,8 @@ import * as React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Input, FluentProvider, webLightTheme, Spinner, Link, Text, tokens, makeStyles } from '@fluentui/react-components';
 import { debounce } from 'lodash';
-import { ProfileCard, UserProfileService, SearchService, UtilityService, IColleagueProfile } from '@barclays/phonebook-sp-fx-profile';
+import { ProfileCard, UserProfileService, SearchService, UtilityService } from '@barclays/phonebook-sp-fx-profile';
+import { IColleagueProfile } from '../../../../models/IColleagueProfile';
 import { ServiceScope } from '@microsoft/sp-core-library';
 import { MockProfileCard, MockSearchService, MockUserProfileService, MockUtilityService } from './PhonebookMock';
 

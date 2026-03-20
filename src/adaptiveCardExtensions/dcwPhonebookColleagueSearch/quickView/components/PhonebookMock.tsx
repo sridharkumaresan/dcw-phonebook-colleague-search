@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IColleagueProfile, ISearchResponse } from '@barclays/phonebook-sp-fx-profile';
+import { IColleagueProfile, ISearchResponse } from '../../../../models/IColleagueProfile';
 import { Text, Avatar } from '@fluentui/react-components';
 
 export class MockUserProfileService {
