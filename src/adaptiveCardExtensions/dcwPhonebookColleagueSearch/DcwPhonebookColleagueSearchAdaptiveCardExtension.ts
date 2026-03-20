@@ -11,6 +11,7 @@ export interface IDcwPhonebookColleagueSearchAdaptiveCardExtensionProps {
   profilePageUrl: string;
   rowLimit: number;
   recentMax: number;
+  enableMockMode: boolean;
 }
 
 export interface IDcwPhonebookColleagueSearchAdaptiveCardExtensionState {

@@ -5,7 +5,8 @@ import {
   IDcwPhonebookColleagueSearchAdaptiveCardExtensionProps,
   IDcwPhonebookColleagueSearchAdaptiveCardExtensionState
 } from '../DcwPhonebookColleagueSearchAdaptiveCardExtension';
-import { PhonebookQuickView, IPhonebookQuickViewProps } from './components/PhonebookQuickView';
+import { PhonebookQuickView } from './components/PhonebookQuickView';
+import { IPhonebookQuickViewProps } from './components/IPhonebookQuickViewProps';
 
 export class QuickView extends BaseWebQuickView<
   IDcwPhonebookColleagueSearchAdaptiveCardExtensionProps,
@@ -23,7 +24,8 @@ export class QuickView extends BaseWebQuickView<
       phonebookWebUrl: this.properties.phonebookWebUrl,
       profilePageUrl: this.properties.profilePageUrl,
       rowLimit: this.properties.rowLimit,
-      recentMax: this.properties.recentMax
+      recentMax: this.properties.recentMax,
+      enableMockMode: this.properties.enableMockMode
     };
     
     const element = React.createElement(PhonebookQuickView, props);

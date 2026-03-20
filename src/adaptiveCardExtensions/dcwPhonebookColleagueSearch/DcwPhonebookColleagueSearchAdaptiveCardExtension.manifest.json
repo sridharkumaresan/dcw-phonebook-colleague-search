@@ -25,7 +25,8 @@
       "phonebookWebUrl": "https://barclays.sharepoint.com/sites/Phonebook",
       "profilePageUrl": "https://barclays.sharepoint.com/sites/Phonebook/SitePages/Profile.aspx",
       "rowLimit": 7,
-      "recentMax": 10
+      "recentMax": 10,
+      "enableMockMode": true
     },
     "cardSize": "Medium"
   }]

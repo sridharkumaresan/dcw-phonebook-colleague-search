@@ -1,4 +1,4 @@
-import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
+import { IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneToggle } from '@microsoft/sp-property-pane';
 import * as strings from 'DcwPhonebookColleagueSearchAdaptiveCardExtensionStrings';
 
 export class DcwPhonebookColleagueSearchPropertyPane {
@@ -27,6 +27,11 @@ export class DcwPhonebookColleagueSearchPropertyPane {
                 }),
                 PropertyPaneTextField('recentMax', {
                   label: 'Recent Max'
+                }),
+                PropertyPaneToggle('enableMockMode', {
+                  label: 'Enable Mock Data',
+                  onText: 'On',
+                  offText: 'Off'
                 })
               ]
             }
