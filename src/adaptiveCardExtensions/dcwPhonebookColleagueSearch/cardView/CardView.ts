@@ -33,7 +33,7 @@ export class CardView extends BaseComponentsCardView<
       },
       footer: {
         componentName: 'cardButton',
-        title: 'Search Directory',
+        title: 'Search Phonebook',
         style: 'positive',
         action: {
           type: 'QuickView',
