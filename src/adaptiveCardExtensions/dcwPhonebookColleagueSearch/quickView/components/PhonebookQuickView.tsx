@@ -55,13 +55,13 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
   
   // Services Integration
   const userProfileService = useRef(
-    USE_MOCK ? new MockUserProfileService(props.serviceScope) : new UserProfileService(props.serviceScope)
+    USE_MOCK ? new MockUserProfileService(props.serviceScope) : new UserProfileService(props.serviceScope as any)
   );
   const utilityService = useRef(
     USE_MOCK ? new MockUtilityService() : new UtilityService()
   ); 
   const searchService = useRef<any>(
-    USE_MOCK ? new MockSearchService() : props.serviceScope.consume(SearchService.serviceKey)
+    USE_MOCK ? new MockSearchService() : props.serviceScope.consume((SearchService as any).serviceKey || (SearchService as any).servicekey)
   );
   
   const RECENT_KEY = `Phonebook_Recent_${props.loginName}`;
@@ -139,8 +139,8 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
           idOrUpn={person.id} 
           viewType={'basic'} 
           enableHoverCardView={true} 
-          userProfileService={userProfileService.current} 
-          profile={person} 
+          userProfileService={userProfileService.current as any} 
+          profile={person as any} 
           showStatus={true} 
         />
         <div style={{fontSize: '12px', color: tokens.colorNeutralForeground2}}>{person.IMH3} || {person.IMH4}</div>
