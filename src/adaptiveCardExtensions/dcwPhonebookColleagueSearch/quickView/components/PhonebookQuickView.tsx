@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Input, FluentProvider, webLightTheme, Spinner, Link, Text, tokens, makeStyles } from '@fluentui/react-components';
+import { SearchRegular } from '@fluentui/react-icons';
 import { debounce } from 'lodash';
 import { ProfileCard, UserProfileService, SearchService, UtilityService } from '@barclays/phonebook-sp-fx-profile';
 import { IColleagueProfile } from '../../../../models/IColleagueProfile';
@@ -25,13 +26,28 @@ const useStyles = makeStyles({
   container: { display: 'flex', flexDirection: 'column', gap: '10px', padding: '16px' },
   searchBox: { width: '100%' },
   results: { display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' },
-  footer: { marginTop: '16px', borderTop: `1px solid ${tokens.colorNeutralStroke1}`, paddingTop: '8px' }
+  footer: { marginTop: '16px', borderTop: `1px solid ${tokens.colorNeutralStroke1}`, paddingTop: '8px' },
+  resultItem: {
+    cursor: 'pointer',
+    padding: '4px 8px',
+    borderRadius: tokens.borderRadiusMedium,
+    '&:hover': {
+      backgroundColor: tokens.colorNeutralBackground1Hover
+    }
+  },
+  sectionHeading: {
+    color: tokens.colorNeutralForeground2,
+    fontSize: tokens.fontSizeBase200,
+    marginBottom: '8px',
+    display: 'block'
+  }
 });
 
 export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) => {
   const styles = useStyles();
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState<IColleagueProfile[]>([]);
+  const [totalRows, setTotalRows] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
   const [recentlyViewed, setRecentlyViewed] = useState<IColleagueProfile[]>([]);
   
@@ -89,6 +105,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
       
       if (requestSeq.current === currentSeq) {
         setResults(response.results);
+        setTotalRows(response.totalRows);
         setIsSearching(false);
       }
     } catch (e) {
@@ -117,7 +134,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
     const CardComponent = USE_MOCK ? MockProfileCard : ProfileCard;
 
     return items.map(person => (
-      <div key={person.id} onClick={() => handleProfileClick(person)} style={{cursor: 'pointer', paddingBottom: '4px'}}>
+      <div key={person.id} onClick={() => handleProfileClick(person)} className={styles.resultItem}>
         <CardComponent 
           idOrUpn={person.id} 
           viewType={'basic'} 
@@ -137,6 +154,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
         <Input 
           className={styles.searchBox}
           placeholder="Search for a colleague"
+          contentBefore={<SearchRegular />}
           value={searchTerm}
           onChange={onSearchChange}
         />
@@ -145,19 +163,19 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
           {isSearching && <Spinner size="tiny" label="Searching..." />}
           
           {!isSearching && searchTerm.length >= 2 && results.length === 0 && (
-            <Text>No results found.</Text>
+            <Text className={styles.sectionHeading}>No results found.</Text>
           )}
           
           {!isSearching && searchTerm.length >= 2 && results.length > 0 && (
             <div>
-               <Text weight="semibold">Showing {results.length} results</Text>
+               <Text className={styles.sectionHeading}>Showing {results.length} of {totalRows} results</Text>
                {renderList(results)}
             </div>
           )}
           
           {searchTerm.length < 2 && recentlyViewed.length > 0 && (
             <div>
-              <Text weight="semibold">Recently viewed</Text>
+              <Text className={styles.sectionHeading}>Recently viewed</Text>
               {renderList(recentlyViewed)}
             </div>
           )}
