@@ -26,8 +26,6 @@ const useStyles = makeStyles({
   container: { 
     display: 'flex', 
     flexDirection: 'column', 
-    height: '100%', 
-    overflow: 'hidden' 
   },
   searchContainer: {
     backgroundColor: '#f5f5f5',
@@ -35,7 +33,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
-    flexShrink: 0
+    position: 'sticky',
+    top: 0,
+    zIndex: 10
   },
   searchTitle: {
     fontWeight: 600,
@@ -48,26 +48,15 @@ const useStyles = makeStyles({
     flexDirection: 'column', 
     gap: '8px', 
     padding: '16px',
-    flex: '1 1 auto',
-    overflowY: 'auto',
-    // MacOS hover invisible style CSS
-    '&::-webkit-scrollbar': {
-      width: '6px',
-      backgroundColor: 'transparent'
-    },
-    '&::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-      backgroundColor: 'transparent'
-    },
-    '&:hover::-webkit-scrollbar-thumb': {
-      backgroundColor: tokens.colorNeutralStroke1
-    }
   },
   footer: { 
     borderTop: `1px solid ${tokens.colorNeutralStroke1}`, 
     padding: '16px',
-    flexShrink: 0,
-    display: 'flex'
+    display: 'flex',
+    position: 'sticky',
+    bottom: 0,
+    zIndex: 10,
+    backgroundColor: tokens.colorNeutralBackground1
   },
   resultItem: {
     cursor: 'pointer',
@@ -82,6 +71,28 @@ const useStyles = makeStyles({
     fontSize: tokens.fontSizeBase200,
     marginBottom: '8px',
     display: 'block'
+  },
+  resultSubText: {
+    fontSize: '12px', 
+    color: tokens.colorNeutralForeground2
+  },
+  viewAllContainer: {
+    marginTop: '16px', 
+    paddingTop: '16px', 
+    borderTop: `1px solid ${tokens.colorNeutralStroke1}`, 
+    display: 'flex', 
+    justifyContent: 'flex-start'
+  },
+  viewAllLink: {
+    fontWeight: 600, 
+    display: 'inline-flex', 
+    alignItems: 'center'
+  },
+  viewAllIcon: {
+    marginLeft: '4px'
+  },
+  fullWidthButton: {
+    width: '100%'
   }
 });
 
@@ -185,7 +196,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
           profile={person as any} 
           showStatus={true} 
         />
-        <div style={{fontSize: '12px', color: tokens.colorNeutralForeground2}}>{person.IMH3} || {person.IMH4}</div>
+        <div className={styles.resultSubText}>{person.IMH3} || {person.IMH4}</div>
       </div>
     ));
   };
@@ -221,9 +232,9 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
                <Text className={styles.sectionHeading}>Showing {results.length} of {totalRows} results</Text>
                {renderList(results)}
                {totalRows > 10 && (
-                 <div style={{ marginTop: '16px', paddingBottom: '8px', display: 'flex', justifyContent: 'center' }}>
-                   <Link href={`${props.phonebookWebUrl}/search.aspx?q=${encodeURIComponent(searchTerm)}`} target="_blank" style={{ fontWeight: 600, display: 'inline-flex', alignItems: 'center' }}>
-                     View all results <ChevronRightRegular fontSize={16} style={{ marginLeft: '4px' }} />
+                 <div className={styles.viewAllContainer}>
+                   <Link href={`${props.phonebookWebUrl}/search.aspx?q=${encodeURIComponent(searchTerm)}`} target="_blank" className={styles.viewAllLink}>
+                     View all results <ChevronRightRegular fontSize={16} className={styles.viewAllIcon} />
                    </Link>
                  </div>
                )}
@@ -239,7 +250,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
         </div>
         
         <div className={styles.footer}>
-          <Button style={{ width: '100%' }} onClick={() => window.open(props.phonebookWebUrl, '_blank')}>
+          <Button className={styles.fullWidthButton} onClick={() => window.open(props.phonebookWebUrl, '_blank')}>
             Go to Phonebook
           </Button>
         </div>
