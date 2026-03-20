@@ -11,6 +11,11 @@ export class QuickView extends BaseWebQuickView<
   IDcwPhonebookColleagueSearchAdaptiveCardExtensionProps,
   IDcwPhonebookColleagueSearchAdaptiveCardExtensionState
 > {
+  // Explicitly set the Quick View header to standard capitalization
+  public get title(): string {
+    return 'Phonebook';
+  }
+
   public render(): void {
     const props: IPhonebookQuickViewProps = {
       serviceScope: this.context.serviceScope,

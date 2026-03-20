@@ -62,9 +62,22 @@ const useStyles = makeStyles({
     cursor: 'pointer',
     padding: '4px 8px',
     borderRadius: tokens.borderRadiusMedium,
+    transitionProperty: 'all',
+    transitionDuration: '0.2s',
+    transitionTimingFunction: 'cubic-bezier(0.33, 1, 0.68, 1)',
     '&:hover': {
-      backgroundColor: tokens.colorNeutralBackground1Hover
+      backgroundColor: tokens.colorNeutralBackground1Hover,
+      transform: 'translateX(4px)'
     }
+  },
+  resultsListContainer: {
+    animationName: {
+      from: { opacity: 0, transform: 'translateY(10px)' },
+      to: { opacity: 1, transform: 'translateY(0)' }
+    },
+    animationDuration: '300ms',
+    animationTimingFunction: 'cubic-bezier(0.33, 1, 0.68, 1)',
+    animationFillMode: 'forwards'
   },
   sectionHeading: {
     color: tokens.colorNeutralForeground2,
@@ -141,7 +154,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
   };
   
   const executeSearch = async (term: string) => {
-    if (term.length < 2) {
+    if (term.length < 3) {
       setResults([]);
       setIsSearching(false);
       return;
@@ -174,7 +187,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
   const onSearchChange = (ev: any, data: any) => {
     const val = data.value || '';
     setSearchTerm(val);
-    if (val.length >= 2) {
+    if (val.length >= 3) {
       setIsSearching(true);
       void debouncedSearch(val);
     } else {
@@ -223,12 +236,12 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
         <div className={styles.results}>
           {isSearching && <Spinner size="tiny" label="Searching..." />}
           
-          {!isSearching && searchTerm.length >= 2 && results.length === 0 && (
+          {!isSearching && searchTerm.length >= 3 && results.length === 0 && (
             <Text className={styles.sectionHeading}>No results found.</Text>
           )}
           
-          {!isSearching && searchTerm.length >= 2 && results.length > 0 && (
-            <div>
+          {!isSearching && searchTerm.length >= 3 && results.length > 0 && (
+            <div className={styles.resultsListContainer}>
                <Text className={styles.sectionHeading}>Showing {results.length} of {totalRows} results</Text>
                {renderList(results)}
                {totalRows > 10 && (
@@ -241,8 +254,8 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
             </div>
           )}
           
-          {searchTerm.length < 2 && recentlyViewed.length > 0 && (
-            <div>
+          {searchTerm.length < 3 && recentlyViewed.length > 0 && (
+            <div className={styles.resultsListContainer}>
               <Text className={styles.sectionHeading}>Recently viewed</Text>
               {renderList(recentlyViewed)}
             </div>
