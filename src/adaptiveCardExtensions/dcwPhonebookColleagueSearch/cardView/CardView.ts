@@ -21,7 +21,7 @@ export class CardView extends BaseComponentsCardView<
     return ImageCardView({
       cardBar: {
         componentName: 'cardBar',
-        title: this.properties.title
+        title: this.properties.title ? this.properties.title.toUpperCase() : 'PHONEBOOK'
       },
       header: {
         componentName: 'text',

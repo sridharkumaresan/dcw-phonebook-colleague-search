@@ -233,7 +233,7 @@ export const PhonebookQuickView: React.FC<IPhonebookQuickViewProps> = (props) =>
                {renderList(results)}
                {totalRows > 10 && (
                  <div className={styles.viewAllContainer}>
-                   <Link href={`${props.phonebookWebUrl}/search.aspx?q=${encodeURIComponent(searchTerm)}`} target="_blank" className={styles.viewAllLink}>
+                   <Link href={`${props.profilePageUrl.replace(/Profile\.aspx/i, 'Search.aspx')}?q=${encodeURIComponent(searchTerm)}`} target="_blank" className={styles.viewAllLink}>
                      View all results <ChevronRightRegular fontSize={16} className={styles.viewAllIcon} />
                    </Link>
                  </div>
