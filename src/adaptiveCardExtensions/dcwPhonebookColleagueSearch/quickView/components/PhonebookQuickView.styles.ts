@@ -6,17 +6,23 @@ export const useStyles = makeStyles({
     flexDirection: 'column',
   },
   searchContainer: {
-    backgroundColor: '#f5f5f5',
-    padding: '16px',
+    backgroundColor: tokens.colorNeutralBackground2,
+    padding: `${tokens.spacingVerticalL} ${tokens.spacingHorizontalL}`,
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+    gap: tokens.spacingHorizontalL,
     position: 'sticky',
     top: 0,
     zIndex: 10
   },
+  quickViewHeader: {
+    fontFamily: tokens.fontFamilyBase,
+    fontSize: tokens.fontSizeBase400,
+    lineHeight: tokens.lineHeightBase400,
+    fontWeight: tokens.fontWeightSemibold,
+  },
   searchTitle: {
-    fontWeight: 600,
+    fontWeight: tokens.fontWeightSemibold,
     fontSize: tokens.fontSizeBase300,
     color: tokens.colorNeutralForeground1
   },
@@ -24,8 +30,8 @@ export const useStyles = makeStyles({
   results: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
-    padding: '16px',
+    gap: tokens.spacingVerticalS,
+    padding: `0px ${tokens.spacingHorizontalL}`,
   },
   footer: {
     borderTop: `1px solid ${tokens.colorNeutralStroke1}`,
@@ -75,7 +81,7 @@ export const useStyles = makeStyles({
     justifyContent: 'flex-start'
   },
   viewAllLink: {
-    fontWeight: 600,
+    fontWeight: tokens.fontWeightSemibold,
     display: 'inline-flex',
     alignItems: 'center'
   },
@@ -83,6 +89,12 @@ export const useStyles = makeStyles({
     marginLeft: '4px'
   },
   fullWidthButton: {
-    width: '100%'
+    width: '100%',
+    border: `1px solid ${tokens.colorNeutralStroke1}`,
+    padding: `${tokens.spacingVerticalS} ${tokens.spacingHorizontalL}`,
+    fontFamily: tokens.fontFamilyBase,
+    fontSize: tokens.fontSizeBase400,
+    lineHeight: tokens.lineHeightBase400,
+    fontWeight: tokens.fontWeightSemibold,
   }
 });
