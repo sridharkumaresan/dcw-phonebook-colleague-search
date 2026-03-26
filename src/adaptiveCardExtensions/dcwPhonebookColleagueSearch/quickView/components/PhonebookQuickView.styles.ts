@@ -4,6 +4,9 @@ export const useStyles = makeStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
+    minHeight: '600px', // Prevent layout jumping on empty/loading states
+    minWidth: 'min(375px, 100vw)', // Ensure a minimum width without breaking smaller devices
+    height: '100%',
   },
   searchContainer: {
     backgroundColor: tokens.colorNeutralBackground2,
@@ -30,8 +33,10 @@ export const useStyles = makeStyles({
   results: {
     display: 'flex',
     flexDirection: 'column',
+    flexGrow: 1, // Crucial: pushes the footer to the bottom of the 600px container when there are no items
     gap: tokens.spacingVerticalS,
     padding: `0px ${tokens.spacingHorizontalL}`,
+    paddingBottom: tokens.spacingVerticalL, // Prevents the last item from hitting exactly flush with the sticky footer boundary
   },
   footer: {
     borderTop: `1px solid ${tokens.colorNeutralStroke1}`,
@@ -52,6 +57,19 @@ export const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: tokens.colorNeutralBackground1Hover,
       transform: 'translateX(4px)'
+    },
+    // Deep CSS overrides for the internal ProfileCard component avatar
+    // Replace '.ms-Persona-coin' with the actual class inspected from the dev tools if different
+    '& .ms-Persona-coin': {
+      // Add your avatar CSS customizations here 
+      // width: '40px !important',
+      // height: '40px !important',
+    },
+    // Deep CSS overrides for the internal ProfileCard component title
+    // Replace '.ms-Persona-primaryText' with the actual class inspected from the dev tools if different
+    '& .ms-Persona-primaryText': {
+      // Add your title CSS customizations here
+      // fontWeight: tokens.fontWeightSemibold,
     }
   },
   resultsListContainer: {
