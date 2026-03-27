@@ -4,10 +4,14 @@ export const useStyles = makeStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '600px', // Prevent layout jumping on empty/loading states
-    minWidth: '375px', // UX specifically required a 375px absolute minimum width
-    width: '100%', // Force full width immediately on load so it doesn't wait for text content to stretch it
-    height: '100%',
+    // Hard-lock height exactly to 570px (below the 577px limit) so the parent Viva modal NEVER triggers a scrollbar
+    height: '570px',
+    minHeight: '570px',
+    maxHeight: '570px',
+    // Lock max dimensions to mathematically fit the pane to prevent horizontal overflow
+    minWidth: '360px',
+    width: '100%',
+    maxWidth: '100%',
   },
   searchContainer: {
     backgroundColor: tokens.colorNeutralBackground2,
@@ -39,8 +43,8 @@ export const useStyles = makeStyles({
     padding: `0px ${tokens.spacingHorizontalL}`,
     paddingBottom: tokens.spacingVerticalL, // Prevents the last item from hitting exactly flush with the sticky footer boundary
     
-    // Enable internal scrolling for large result sets
-    overflowY: 'auto',
+    // 'scroll' permanently reserves the 6px space natively, completely fixing the horizontal width jumping when results populate!
+    overflowY: 'scroll',
     
     // macOS Style Auto-Hiding Scrollbar (Supported by Chromium/Edge/Teams)
     '&::-webkit-scrollbar': {
