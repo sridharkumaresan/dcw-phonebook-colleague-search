@@ -4,14 +4,23 @@ export const useStyles = makeStyles({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    // Hard-lock height exactly to 570px (below the 577px limit) so the parent Viva modal NEVER triggers a scrollbar
-    height: '570px',
-    minHeight: '570px',
-    maxHeight: '570px',
-    // Lock max dimensions to mathematically fit the pane to prevent horizontal overflow
-    minWidth: '360px',
+    // 1. Establish this root as a layout Container. All inner child elements can now natively use @container Queries!
+    containerType: 'inline-size',
+    
+    // 2. Mobile-First Default: 100% fluid footprint safely prevents overflowing the iOS/Android Teams App
     width: '100%',
-    maxWidth: '100%',
+    height: '100%',
+    
+    // 3. UX Compromise: Mathematically freeze the boundary layout ONLY when the user is safely on a Desktop screen
+    '@media (min-width: 480px) and (min-height: 680px)': {
+      height: '570px',
+      minHeight: '570px',
+      maxHeight: '570px',
+      minWidth: '360px',
+      width: '100%',
+      maxWidth: '100%'
+    },
+
   },
   searchContainer: {
     backgroundColor: tokens.colorNeutralBackground2,
@@ -75,6 +84,12 @@ export const useStyles = makeStyles({
   resultItem: {
     cursor: 'pointer',
     padding: '4px 8px',
+    
+    // Demonstration of your new Component Library Container Query power!
+    // If the parent Phonebook container gets violently squished (e.g. on a tiny phone), dynamically shrink this inner card padding instantly:
+    '@container (max-width: 340px)': {
+      padding: '2px 4px',
+    },
     borderRadius: tokens.borderRadiusMedium,
     transitionProperty: 'all',
     transitionDuration: '0.2s',
