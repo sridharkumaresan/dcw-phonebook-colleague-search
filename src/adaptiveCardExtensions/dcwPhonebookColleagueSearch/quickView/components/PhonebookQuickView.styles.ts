@@ -5,7 +5,8 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '600px', // Prevent layout jumping on empty/loading states
-    minWidth: 'min(375px, 100vw)', // Ensure a minimum width without breaking smaller devices
+    minWidth: '375px', // UX specifically required a 375px absolute minimum width
+    width: '100%', // Force full width immediately on load so it doesn't wait for text content to stretch it
     height: '100%',
   },
   searchContainer: {
@@ -37,6 +38,26 @@ export const useStyles = makeStyles({
     gap: tokens.spacingVerticalS,
     padding: `0px ${tokens.spacingHorizontalL}`,
     paddingBottom: tokens.spacingVerticalL, // Prevents the last item from hitting exactly flush with the sticky footer boundary
+    
+    // Enable internal scrolling for large result sets
+    overflowY: 'auto',
+    
+    // macOS Style Auto-Hiding Scrollbar (Supported by Chromium/Edge/Teams)
+    '&::-webkit-scrollbar': {
+      width: '6px',
+      backgroundColor: 'transparent',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: 'transparent', // Invisible track
+    },
+    '&::-webkit-scrollbar-thumb': {
+      borderRadius: '10px',
+      backgroundColor: 'transparent', // Hidden by default
+    },
+    // The thumb background color turns grey ONLY when hovering over the results container
+    '&:hover::-webkit-scrollbar-thumb': {
+      backgroundColor: tokens.colorNeutralStroke1Hover, 
+    }
   },
   footer: {
     borderTop: `1px solid ${tokens.colorNeutralStroke1}`,
@@ -59,17 +80,16 @@ export const useStyles = makeStyles({
       transform: 'translateX(4px)'
     },
     // Deep CSS overrides for the internal ProfileCard component avatar
-    // Replace '.ms-Persona-coin' with the actual class inspected from the dev tools if different
-    '& .ms-Persona-coin': {
-      // Add your avatar CSS customizations here 
-      // width: '40px !important',
-      // height: '40px !important',
+    '& .fui-Avatar': {
+      // Override Fluent UI v9 Avatar size
+      width: '44px !important',
+      height: '44px !important',
     },
     // Deep CSS overrides for the internal ProfileCard component title
-    // Replace '.ms-Persona-primaryText' with the actual class inspected from the dev tools if different
-    '& .ms-Persona-primaryText': {
-      // Add your title CSS customizations here
-      // fontWeight: tokens.fontWeightSemibold,
+    '& .fui-Persona__primaryText, & .fui-Persona__primaryText span': {
+      // Increase title font size (targeting inner spans directly to bypass Fluent UI's own font overrides)
+      fontSize: '16px !important',
+      fontWeight: `${tokens.fontWeightSemibold} !important`,
     }
   },
   resultsListContainer: {
